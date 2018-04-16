@@ -1,0 +1,79 @@
+#reports th{
+	background: #2fa7cc;
+	color: #fff;
+	text-align: center;
+	font-weight: bold;
+}
+.chart-div-big{
+	width:90%;
+	height:auto;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+.chart-div{
+	width:120px;
+	height:60px;
+}
+.weight-600{
+	font-weight: 600;
+	color: #3a3939;
+}
+.weight-600-Chart{
+	font-weight: 600;
+	color: #3a3939;
+	display: inline-block;
+}
+.size-30{
+	font-size: 30px;
+}
+.count-category-Chart
+{
+	font-weight: bold;
+	color: #b1b1b1;
+	margin-top: 7px;
+	text-align:right;
+}
+.summary-chart{
+	border: 1px solid #bfb9b9;
+	padding: 10px;
+}
+.count-category
+{
+	font-weight:bold;
+	color: #b1b1b1;
+}
+.space{
+	margin-top:20px;
+	margin-bottom:20px;
+}
+.linkBtn
+{
+	margin-top: 25px;
+	float: right;
+}
+
+div.well{
+  height: 250px;
+} 
+div#login{
+	text-align: center;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-weight: bold;
+	color:#fff;
+}
+.Absolute-Center {
+  background:#83889e;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  border: 1px solid #eee;
+}
+
+.Absolute-Center.is-Responsive {
+  width: 50%; 
+  height: 50%;
+  min-width: 200px;
+  max-width: 400px;
+  padding: 25px;
+}
