@@ -153,6 +153,290 @@
 <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-<script type="text/javascript" src="includes/js/overview.js"></script>
-<script type="text/javascript" src="includes/js/custom.js"></script>
+<script>
+	$('#reports').DataTable();
+
+	new Chart(document.getElementById("clicks-chart"), {
+		type: 'line',
+		data: {
+			labels: [1,2,3,4,5],
+			datasets: [{ 
+				data: [5,5,4,2,0],
+				fill: '#f4f4f6',
+				borderColor:'#7d7d7d',
+				pointRadius:0,
+			}]
+		},
+		options: {
+			responsive:true,
+			bezierCurve : false,
+			legend: {
+				display: false,
+			},
+			scales:
+			{
+				yAxes: [{
+					gridLines : {
+						display : false
+					},
+					ticks: {
+						display : false
+					},
+				}],
+				xAxes: [{
+					gridLines : {
+						display : false
+					},
+					ticks: {
+						display : false
+					},
+				}]
+			},
+			title: {
+				display: false,
+			},
+			elements: {
+				line: {
+					tension: 0, // disables bezier curves
+				}
+			},
+			animation: {
+				duration: 0, // general animation time
+			},
+			hover: {
+				animationDuration: 0, // duration of animations when hovering an item
+			},
+			responsiveAnimationDuration: 0, // animation duration after a resize
+		}
+	});
+
+	new Chart(document.getElementById("conversions-chart"), {
+		type: 'line',
+		data: {
+			labels: [1,2,3,4,5],
+			datasets: [{ 
+				data: [5,5,4,2,0],
+				fill: '#f4f4f6',
+				borderColor:'#7d7d7d',
+				pointRadius:0,
+			}]
+		},
+		options: {
+			responsive:true,
+			bezierCurve : false,
+			legend: {
+				display: false,
+			},
+			scales:
+			{
+				yAxes: [{
+					gridLines : {
+						display : false
+					},
+					ticks: {
+						display : false
+					},
+				}],
+				xAxes: [{
+					gridLines : {
+						display : false
+					},
+					ticks: {
+						display : false
+					},
+				}]
+			},
+			title: {
+				display: false,
+			},
+			elements: {
+				line: {
+					tension: 0, // disables bezier curves
+				}
+			},
+			animation: {
+				duration: 0, // general animation time
+			},
+			hover: {
+				animationDuration: 0, // duration of animations when hovering an item
+			},
+			responsiveAnimationDuration: 0, // animation duration after a resize
+		}
+	});
+
+	new Chart(document.getElementById("ip-chart"), {
+		type: 'line',
+		data: {
+			labels: [1,2,3,4,5],
+			datasets: [{ 
+				data: [5,5,4,2,0],
+				fill: '#f4f4f6',
+				borderColor:'#7d7d7d',
+				pointRadius:0,
+			}]
+		},
+		options: {
+			responsive:true,
+			bezierCurve : false,
+			legend: {
+				display: false,
+			},
+			scales:
+			{
+				yAxes: [{
+					gridLines : {
+						display : false
+					},
+					ticks: {
+						display : false
+					},
+				}],
+				xAxes: [{
+					gridLines : {
+						display : false
+					},
+					ticks: {
+						display : false
+					},
+				}]
+			},
+			title: {
+				display: false,
+			},
+			elements: {
+				line: {
+					tension: 0, // disables bezier curves
+				}
+			},
+			animation: {
+				duration: 0, // general animation time
+			},
+			hover: {
+				animationDuration: 0, // duration of animations when hovering an item
+			},
+			responsiveAnimationDuration: 0, // animation duration after a resize
+		}
+	});
+
+	new Chart(document.getElementById("epc-chart"), {
+		type: 'line',
+		data: {
+			labels: [1,2,3,4,5],
+			datasets: [{ 
+				data: [5,5,4,2,0],
+				fill: '#f4f4f6',
+				borderColor:'#7d7d7d',
+				pointRadius:0,
+			}]
+		},
+		options: {
+			responsive:true,
+			bezierCurve : false,
+			legend: {
+				display: false,
+			},
+			scales:
+			{
+				yAxes: [{
+					gridLines : {
+						display : false
+					},
+					ticks: {
+						display : false
+					},
+				}],
+				xAxes: [{
+					gridLines : {
+						display : false
+					},
+					ticks: {
+						display : false
+					},
+				}]
+			},
+			title: {
+				display: false,
+			},
+			elements: {
+				line: {
+					tension: 0, // disables bezier curves
+				}
+			},
+			animation: {
+				duration: 0, // general animation time
+			},
+			hover: {
+				animationDuration: 0, // duration of animations when hovering an item
+			},
+			responsiveAnimationDuration: 0, // animation duration after a resize
+		}
+	});
+
+	new Chart(document.getElementById("revenue-chart"), {
+		type: 'line',
+		data: {
+			labels: [1,2,3,4,5],
+			datasets: [{ 
+				data: [5,5,4,2,0],
+				fill: '#f4f4f6',
+				borderColor:'#7d7d7d',
+				pointRadius:0,
+			}]
+		},
+		options: {
+			responsive:true,
+			bezierCurve : false,
+			legend: {
+				display: false,
+			},
+			scales:
+			{
+				yAxes: [{
+					gridLines : {
+						display : false
+					},
+					ticks: {
+						display : false
+					},
+				}],
+				xAxes: [{
+					gridLines : {
+						display : false
+					},
+					ticks: {
+						display : false
+					},
+				}]
+			},
+			title: {
+				display: false,
+			},
+			elements: {
+				line: {
+					tension: 0, // disables bezier curves
+				}
+			},
+			animation: {
+				duration: 0, // general animation time
+			},
+			hover: {
+				animationDuration: 0, // duration of animations when hovering an item
+			},
+			responsiveAnimationDuration: 0, // animation duration after a resize
+		}
+	});
+
+	$('input[name="daterange"]').daterangepicker({
+
+		"minDate": "01/01/2017"
+		}, 
+		function(start, end, label) {
+			console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+		}
+	);
+
+	$('body').on('click','.applyBtn',function(e){
+		$("#range").submit();
+	});	
+</script>
 </html>
