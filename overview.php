@@ -22,7 +22,7 @@
 		{
 			$request = new Request;
 			$endDate = date_format(date_create(date('Y-m-d')),'m/d/Y');
-			$startDate = '04/01/2018';
+			$startDate = '01/01/2017';
 		}
 	?>
 	<div class="container">
