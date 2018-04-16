@@ -69,6 +69,69 @@
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-<script type="text/javascript" src="includes/js/chartInfo.js"></script>
-<script type="text/javascript" src="includes/js/custom.js"></script>
+<script>
+	new Chart(document.getElementById("revenue-chart"), {
+		type: 'line',
+		data: {
+			labels: [<?php echo "'".$chartLabels."'" ?>],
+			datasets: [{ 
+				data: [<?php echo $request->getRevenueChartDatas();?>],
+				fill: '#f4f4f6',
+				borderColor:'#7d7d7d',
+				pointRadius:0,
+			}]
+		},
+		options: {
+			responsive:true,
+			bezierCurve : false,
+			legend: {
+				display: false,
+			},
+			scales:
+			{
+				yAxes: [{
+					gridLines : {
+						display : false
+					},
+					ticks: {
+						min: 0, // it is for ignoring negative step.
+						beginAtZero: true,
+					}
+				}],
+				xAxes: [{
+					gridLines : {
+						display : false
+					},
+				}]
+			},
+			title: {
+				display: false,
+			},
+			elements: {
+				line: {
+					tension: 0, // disables bezier curves
+				}
+			},
+			animation: {
+				duration: 0, // general animation time
+			},
+			hover: {
+				animationDuration: 0, // duration of animations when hovering an item
+			},
+			responsiveAnimationDuration: 0, // animation duration after a resize
+		}
+	});
+	$('input[name="daterange"]').daterangepicker({
+
+		"minDate": "01/01/2017"
+		}, 
+		function(start, end, label) {
+			console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+		}
+	);
+
+	$('body').on('click','.applyBtn',function(e){
+		$("#range").submit();
+	});
+</script>
 </html>
