@@ -10,6 +10,15 @@
 	<?php
 		require_once('includes/Request.php');
 
+		if(isset($_GET['startDate']) && !empty($_GET['startDate']) && isset($_GET['endDate']) && !empty($_GET['endDate']))
+		{
+			$sDate = date_format(date_create($_GET['startDate']),'Y-m-d');
+			$eDate = date_format(date_create($_GET['endDate']),'Y-m-d');
+			$startDate = $_GET['startDate'];
+			$endDate = $_GET['endDate'];
+			$request = new Request($sDate,$eDate);
+		}
+		
 		if(isset($_POST['daterange']))
 		{
 			$sDate = date_format(date_create(trim(explode('-',$_POST['daterange'])[0])),'Y-m-d');
@@ -18,7 +27,8 @@
 			$endDate = trim(explode('-',$_POST['daterange'])[1]);
 			$request = new Request($sDate,$eDate);
 		}
-		else
+		
+		if(!isset($_GET['startDate']) && empty($_GET['startDate']) && !isset($_GET['endDate']) && empty($_GET['endDate']) && !isset($_POST['daterange']))
 		{
 			$request = new Request;
 			$endDate = date_format(date_create(date('Y-m-d')),'m/d/Y');
@@ -46,7 +56,7 @@
 					<div class="row">
 						<div class="col-md-1"></div>
 						<div class="col-md-2">
-							<a href="clicks.php" class="linkBtn">
+							<a href="clicks.php?startDate=<?php echo $startDate;?>&endDate=<?php echo $endDate;?>" class="linkBtn">
 								<h5 class="weight-600">Clicks</h5>
 								<span class="count-category"><?php echo $request->getClicks(); ?></span>
 								<div class="chart-div">
@@ -55,7 +65,7 @@
 							</a>
 						</div>
 						<div class="col-md-2">
-							<a href="conversions.php" class="linkBtn">
+							<a href="conversions.php?startDate=<?php echo $startDate;?>&endDate=<?php echo $endDate;?>" class="linkBtn">
 								<h5 class="weight-600">Conversions</h5>
 								<span class="count-category"><?php echo $request->getConversions(); ?></span>
 								<div class="chart-div">
@@ -64,7 +74,7 @@
 							</a>
 						</div>
 						<div class="col-md-2">
-							<a href="revenues.php" class="linkBtn">
+							<a href="revenues.php?startDate=<?php echo $startDate;?>&endDate=<?php echo $endDate;?>" class="linkBtn">
 								<h5 class="weight-600">Revenue</h5>
 								<span class="count-category"><?php echo '$'.number_format($request->getRevenue(),2); ?></span>
 								<div class="chart-div">
@@ -73,7 +83,7 @@
 							</a>
 						</div>
 						<div class="col-md-2">
-							<a href="individual.php" class="linkBtn">
+							<a href="individual.php?startDate=<?php echo $startDate;?>&endDate=<?php echo $endDate;?>" class="linkBtn">
 								<h5 class="weight-600">Individual Payout</h5>
 								<span class="count-category">
 									<?php 
@@ -89,7 +99,7 @@
 							</a>
 						</div>
 						<div class="col-md-2">
-							<a href="epc.php" class="linkBtn">
+							<a href="epc.php?startDate=<?php echo $startDate;?>&endDate=<?php echo $endDate;?>" class="linkBtn">
 								<h5 class="weight-600">Earnings per Click</h5>
 								<span class="count-category">
 									<?php 
@@ -154,289 +164,293 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 <script>
-	$('#reports').DataTable();
-
-	new Chart(document.getElementById("clicks-chart"), {
-		type: 'line',
-		data: {
-			labels: [1,2,3,4,5],
-			datasets: [{ 
-				data: [5,5,4,2,0],
-				fill: '#f4f4f6',
-				borderColor:'#7d7d7d',
-				pointRadius:0,
-			}]
-		},
-		options: {
-			responsive:true,
-			bezierCurve : false,
-			legend: {
-				display: false,
-			},
-			scales:
-			{
-				yAxes: [{
-					gridLines : {
-						display : false
-					},
-					ticks: {
-						display : false
-					},
-				}],
-				xAxes: [{
-					gridLines : {
-						display : false
-					},
-					ticks: {
-						display : false
-					},
+	$(document).ready(function() {
+		$('#reports').DataTable();
+		
+		new Chart(document.getElementById("clicks-chart"), {
+			type: 'line',
+			data: {
+				labels: [1,2,3,4,5],
+				datasets: [{ 
+					data: [5,5,4,2,0],
+					fill: '#f4f4f6',
+					borderColor:'#7d7d7d',
+					pointRadius:0,
 				}]
 			},
-			title: {
-				display: false,
-			},
-			elements: {
-				line: {
-					tension: 0, // disables bezier curves
-				}
-			},
-			animation: {
-				duration: 0, // general animation time
-			},
-			hover: {
-				animationDuration: 0, // duration of animations when hovering an item
-			},
-			responsiveAnimationDuration: 0, // animation duration after a resize
-		}
-	});
-
-	new Chart(document.getElementById("conversions-chart"), {
-		type: 'line',
-		data: {
-			labels: [1,2,3,4,5],
-			datasets: [{ 
-				data: [5,5,4,2,0],
-				fill: '#f4f4f6',
-				borderColor:'#7d7d7d',
-				pointRadius:0,
-			}]
-		},
-		options: {
-			responsive:true,
-			bezierCurve : false,
-			legend: {
-				display: false,
-			},
-			scales:
-			{
-				yAxes: [{
-					gridLines : {
-						display : false
-					},
-					ticks: {
-						display : false
-					},
-				}],
-				xAxes: [{
-					gridLines : {
-						display : false
-					},
-					ticks: {
-						display : false
-					},
+			options: {
+				responsive:true,
+				bezierCurve : false,
+				legend: {
+					display: false,
+				},
+				scales:
+				{
+					yAxes: [{
+						gridLines : {
+							display : false
+						},
+						ticks: {
+							display : false
+						},
+					}],
+					xAxes: [{
+						gridLines : {
+							display : false
+						},
+						ticks: {
+							display : false
+						},
+					}]
+				},
+				title: {
+					display: false,
+				},
+				elements: {
+					line: {
+						tension: 0, // disables bezier curves
+					}
+				},
+				animation: {
+					duration: 0, // general animation time
+				},
+				hover: {
+					animationDuration: 0, // duration of animations when hovering an item
+				},
+				responsiveAnimationDuration: 0, // animation duration after a resize
+			}
+		});
+		
+		new Chart(document.getElementById("conversions-chart"), {
+			type: 'line',
+			data: {
+				labels: [1,2,3,4,5],
+				datasets: [{ 
+					data: [5,5,4,2,0],
+					fill: '#f4f4f6',
+					borderColor:'#7d7d7d',
+					pointRadius:0,
 				}]
 			},
-			title: {
-				display: false,
-			},
-			elements: {
-				line: {
-					tension: 0, // disables bezier curves
-				}
-			},
-			animation: {
-				duration: 0, // general animation time
-			},
-			hover: {
-				animationDuration: 0, // duration of animations when hovering an item
-			},
-			responsiveAnimationDuration: 0, // animation duration after a resize
-		}
-	});
-
-	new Chart(document.getElementById("ip-chart"), {
-		type: 'line',
-		data: {
-			labels: [1,2,3,4,5],
-			datasets: [{ 
-				data: [5,5,4,2,0],
-				fill: '#f4f4f6',
-				borderColor:'#7d7d7d',
-				pointRadius:0,
-			}]
-		},
-		options: {
-			responsive:true,
-			bezierCurve : false,
-			legend: {
-				display: false,
-			},
-			scales:
-			{
-				yAxes: [{
-					gridLines : {
-						display : false
-					},
-					ticks: {
-						display : false
-					},
-				}],
-				xAxes: [{
-					gridLines : {
-						display : false
-					},
-					ticks: {
-						display : false
-					},
+			options: {
+				responsive:true,
+				bezierCurve : false,
+				legend: {
+					display: false,
+				},
+				scales:
+				{
+					yAxes: [{
+						gridLines : {
+							display : false
+						},
+						ticks: {
+							display : false
+						},
+					}],
+					xAxes: [{
+						gridLines : {
+							display : false
+						},
+						ticks: {
+							display : false
+						},
+					}]
+				},
+				title: {
+					display: false,
+				},
+				elements: {
+					line: {
+						tension: 0, // disables bezier curves
+					}
+				},
+				animation: {
+					duration: 0, // general animation time
+				},
+				hover: {
+					animationDuration: 0, // duration of animations when hovering an item
+				},
+				responsiveAnimationDuration: 0, // animation duration after a resize
+			}
+		});
+		
+		new Chart(document.getElementById("ip-chart"), {
+			type: 'line',
+			data: {
+				labels: [1,2,3,4,5],
+				datasets: [{ 
+					data: [5,5,4,2,0],
+					fill: '#f4f4f6',
+					borderColor:'#7d7d7d',
+					pointRadius:0,
 				}]
 			},
-			title: {
-				display: false,
-			},
-			elements: {
-				line: {
-					tension: 0, // disables bezier curves
-				}
-			},
-			animation: {
-				duration: 0, // general animation time
-			},
-			hover: {
-				animationDuration: 0, // duration of animations when hovering an item
-			},
-			responsiveAnimationDuration: 0, // animation duration after a resize
-		}
-	});
-
-	new Chart(document.getElementById("epc-chart"), {
-		type: 'line',
-		data: {
-			labels: [1,2,3,4,5],
-			datasets: [{ 
-				data: [5,5,4,2,0],
-				fill: '#f4f4f6',
-				borderColor:'#7d7d7d',
-				pointRadius:0,
-			}]
-		},
-		options: {
-			responsive:true,
-			bezierCurve : false,
-			legend: {
-				display: false,
-			},
-			scales:
-			{
-				yAxes: [{
-					gridLines : {
-						display : false
-					},
-					ticks: {
-						display : false
-					},
-				}],
-				xAxes: [{
-					gridLines : {
-						display : false
-					},
-					ticks: {
-						display : false
-					},
+			options: {
+				responsive:true,
+				bezierCurve : false,
+				legend: {
+					display: false,
+				},
+				scales:
+				{
+					yAxes: [{
+						gridLines : {
+							display : false
+						},
+						ticks: {
+							display : false
+						},
+					}],
+					xAxes: [{
+						gridLines : {
+							display : false
+						},
+						ticks: {
+							display : false
+						},
+					}]
+				},
+				title: {
+					display: false,
+				},
+				elements: {
+					line: {
+						tension: 0, // disables bezier curves
+					}
+				},
+				animation: {
+					duration: 0, // general animation time
+				},
+				hover: {
+					animationDuration: 0, // duration of animations when hovering an item
+				},
+				responsiveAnimationDuration: 0, // animation duration after a resize
+			}
+		});
+		
+		new Chart(document.getElementById("epc-chart"), {
+			type: 'line',
+			data: {
+				labels: [1,2,3,4,5],
+				datasets: [{ 
+					data: [5,5,4,2,0],
+					fill: '#f4f4f6',
+					borderColor:'#7d7d7d',
+					pointRadius:0,
 				}]
 			},
-			title: {
-				display: false,
-			},
-			elements: {
-				line: {
-					tension: 0, // disables bezier curves
-				}
-			},
-			animation: {
-				duration: 0, // general animation time
-			},
-			hover: {
-				animationDuration: 0, // duration of animations when hovering an item
-			},
-			responsiveAnimationDuration: 0, // animation duration after a resize
-		}
-	});
-
-	new Chart(document.getElementById("revenue-chart"), {
-		type: 'line',
-		data: {
-			labels: [1,2,3,4,5],
-			datasets: [{ 
-				data: [5,5,4,2,0],
-				fill: '#f4f4f6',
-				borderColor:'#7d7d7d',
-				pointRadius:0,
-			}]
-		},
-		options: {
-			responsive:true,
-			bezierCurve : false,
-			legend: {
-				display: false,
-			},
-			scales:
-			{
-				yAxes: [{
-					gridLines : {
-						display : false
-					},
-					ticks: {
-						display : false
-					},
-				}],
-				xAxes: [{
-					gridLines : {
-						display : false
-					},
-					ticks: {
-						display : false
-					},
+			options: {
+				responsive:true,
+				bezierCurve : false,
+				legend: {
+					display: false,
+				},
+				scales:
+				{
+					yAxes: [{
+						gridLines : {
+							display : false
+						},
+						ticks: {
+							display : false
+						},
+					}],
+					xAxes: [{
+						gridLines : {
+							display : false
+						},
+						ticks: {
+							display : false
+						},
+					}]
+				},
+				title: {
+					display: false,
+				},
+				elements: {
+					line: {
+						tension: 0, // disables bezier curves
+					}
+				},
+				animation: {
+					duration: 0, // general animation time
+				},
+				hover: {
+					animationDuration: 0, // duration of animations when hovering an item
+				},
+				responsiveAnimationDuration: 0, // animation duration after a resize
+			}
+		});
+		
+		new Chart(document.getElementById("revenue-chart"), {
+			type: 'line',
+			data: {
+				labels: [1,2,3,4,5],
+				datasets: [{ 
+					data: [5,5,4,2,0],
+					fill: '#f4f4f6',
+					borderColor:'#7d7d7d',
+					pointRadius:0,
 				}]
 			},
-			title: {
-				display: false,
-			},
-			elements: {
-				line: {
-					tension: 0, // disables bezier curves
-				}
-			},
-			animation: {
-				duration: 0, // general animation time
-			},
-			hover: {
-				animationDuration: 0, // duration of animations when hovering an item
-			},
-			responsiveAnimationDuration: 0, // animation duration after a resize
-		}
+			options: {
+				responsive:true,
+				bezierCurve : false,
+				legend: {
+					display: false,
+				},
+				scales:
+				{
+					yAxes: [{
+						gridLines : {
+							display : false
+						},
+						ticks: {
+							display : false
+						},
+					}],
+					xAxes: [{
+						gridLines : {
+							display : false
+						},
+						ticks: {
+							display : false
+						},
+					}]
+				},
+				title: {
+					display: false,
+				},
+				elements: {
+					line: {
+						tension: 0, // disables bezier curves
+					}
+				},
+				animation: {
+					duration: 0, // general animation time
+				},
+				hover: {
+					animationDuration: 0, // duration of animations when hovering an item
+				},
+				responsiveAnimationDuration: 0, // animation duration after a resize
+			}
+		});
+		
+		
+		$('input[name="daterange"]').daterangepicker({
+
+			"minDate": "01/01/2017"
+			}, 
+			function(start, end, label) {
+				console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+			}
+		);
+		
+		$('body').on('click','.applyBtn',function(e){
+			$("#range").submit();
+		});
 	});
-
-	$('input[name="daterange"]').daterangepicker({
-
-		"minDate": "01/01/2017"
-		}, 
-		function(start, end, label) {
-			console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
-		}
-	);
-
-	$('body').on('click','.applyBtn',function(e){
-		$("#range").submit();
-	});	
+	
 </script>
 </html>
