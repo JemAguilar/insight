@@ -34,7 +34,7 @@
 			<div class="col-md-3">
 				<form name= "range" id ="range" action ="" method="post">
 					<label>Date Range</label>
-					<input type="text" name="daterange" class="form-control" value="<?php $startDate.' - '.$endDate; ?>" />
+					<input type="text" name="daterange" class="form-control" value="<?php echo $startDate.' - '.$endDate; ?>" />
 				</form>
 			</div>
 			<div class="col-md-9">
